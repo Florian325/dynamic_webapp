@@ -1,0 +1,135 @@
+html,
+:root {
+	padding: 0;
+	margin: 0;
+
+	--text: #211207;
+	--background: #fefcfb;
+	--primary: #8a7f1e;
+	--secondary: #dbf0bc;
+	--accent: #5f8a1e;
+}
+
+body {
+	color: var(--text);
+	margin: 0;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+header {
+	/* background-color: #851515; */
+	/* color: #333333; */
+	background-color: var(--primary);
+
+	/* border-bottom: 1px solid #dddddd; */
+	display: flex;
+	justify-content: space-between;
+	align-items: baseline;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	padding: 0.5rem 2rem;
+}
+
+header > h1 {
+	margin: 0;
+}
+
+nav > ul {
+	display: flex;
+	list-style: none;
+	flex-wrap: wrap;
+	gap: 1rem;
+
+	padding: 0;
+	margin: 0;
+}
+
+nav > ul > li > a {
+	color: #ffffff;
+	text-decoration: none;
+}
+
+main {
+	/* background-color: bisque; */
+	background-color: var(--background);
+	display: flex;
+	flex-direction: column;
+
+	padding: 0.5rem 2rem;
+}
+
+#blog-wrapper > a {
+	text-decoration: none;
+}
+
+.post-item {
+	padding: 1rem;
+	text-decoration: none;
+	background-color: var(--secondary);
+	color: var(--text);
+	border-radius: 0.5rem;
+}
+
+.post-header {
+	display: flex;
+	align-items: baseline;
+	justify-content: flex-start;
+	gap: 1rem;
+	flex-wrap: wrap;
+	border-bottom: 2px solid var(--accent);
+	margin-bottom: 1.5rem;
+}
+
+.post-header > h3 {
+	margin: 0;
+}
+
+.post-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem;
+	margin: 1rem 0;
+}
+
+.link-button {
+	text-decoration: none;
+	background-color: var(--accent);
+	padding: 0.5rem 1rem;
+	border-radius: 0.5rem;
+	cursor: pointer;
+	border: none;
+	color: white;
+}
+
+form > input,
+textarea {
+	width: 100%;
+	max-width: 100%;
+	min-width: 100%;
+	padding: 0.5rem;
+	margin-bottom: 1rem;
+	border-radius: 0.5rem;
+	border: 1px solid var(--primary);
+}
+
+form > label {
+	margin-bottom: 0.5rem;
+	color: var(--text);
+}
+
+input[type="submit"] {
+	width: 100%;
+	padding: 1rem;
+	margin: 8px 0;
+	cursor: pointer;
+	background-color: var(--accent);
+	border: none;
+	color: white;
+	/* background-color: #4caf50;
+	color: white;
+	padding: 14px 20px;
+	margin: 8px 0;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer; */
+}
