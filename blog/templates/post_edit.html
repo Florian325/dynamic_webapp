@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="de">
+	<head>
+		<link rel="stylesheet" href="{% static 'index.css' %}" />
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Edit {{ post.title }}</title>
+	</head>
+	<body>
+		<header>
+			<h1>Blog</h1>
+			<nav>
+				<ul>
+					<li><a href="/">Home</a></li>
+					<li><a href="/posts">Posts</a></li>
+
+					{% if user.is_authenticated %}
+					<li><a href="/posts/self/">Me</a></li>
+					<li><a href="/user/logout/">Logout</a></li>
+					{% else %}
+					<li><a href="/user/login/">Login</a></li>
+					<li><a href="/user/register/">Register</a></li>
+					{% endif %}
+				</ul>
+			</nav>
+		</header>
+
+		<main>
+			<h2>Edit Post</h2>
+			<p class="post-actions">
+				<a class="link-button" href="/post/{{ post.id }}/delete/"
+					>Delete</a
+				>
+				<a class="link-button" href="/posts/">Back</a>
+			</p>
+
+			<div>
+				{% if error %}
+				<p>{{ error }}</p>
+				{% endif %}
+				<form method="post">
+					{% csrf_token %}
+					<label for="title">Title</label>
+					<input
+						type="text"
+						name="title"
+						value="{{ post.title }}"
+						required />
+					<label for="content">Content</label>
+					<textarea name="content" required>
+{{ post.content }}</textarea
+					>
+					<input type="submit" value="Save" />
+				</form>
+			</div>
+		</main>
+
+		<footer></footer>
+	</body>
+</html>
