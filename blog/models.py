@@ -15,6 +15,7 @@ class Article(models.Model):
     )
     content = models.TextField()
     created_at = models.DateTimeField(default=timezone.now)
+    views = models.IntegerField(default=0)
 
     def __str__(self):
         return self.title + " by " + self.author.username

@@ -8,7 +8,8 @@ from blog.models import Article, Comment
 
 
 def index(request):
-    return render(request, "index.html")
+    posts = Article.objects.all().order_by("-views")
+    return render(request, "posts.html", {"posts": posts})
 
 
 def login_user(request):
@@ -18,16 +19,17 @@ def login_user(request):
         username = request.POST.get("username")
         password = request.POST.get("password")
         user = authenticate(request, username=username, password=password)
-        print(user)
         if user is not None:
             login(request, user)
-            print("User logged in")
             return redirect("index")
         return render(request, "user/login.html", {"error": "Invalid credentials"})
     return render(request, "user/login.html")
 
 
 def register_user(request):
+    if request.user.is_authenticated:
+        return redirect("index")
+
     if request.method == "POST":
         username = request.POST.get("username")
         password = request.POST.get("password")
@@ -73,15 +75,13 @@ def logout_user(request):
 
 
 def posts(request):
-    if not request.user.is_authenticated:
-        return redirect("index")
-    posts = Article.objects.all()
+    posts = Article.objects.all().order_by("-created_at")
     return render(request, "posts.html", {"posts": posts})
 
 
 def posts_self(request):
     if not request.user.is_authenticated:
-        return redirect("index")
+        return redirect("login")
     # posts = Article.objects.filter(author=request.user)
     posts = request.user.posts.all()
     return render(request, "posts.html", {"posts": posts})
@@ -89,19 +89,22 @@ def posts_self(request):
 
 def post(request, post_id):
     if not request.user.is_authenticated:
-        return redirect("index")
+        return redirect("login")
 
     try:
         post = Article.objects.get(id=post_id)
     except Article.DoesNotExist:
         return redirect("posts")
 
+    post.views += 1
+    post.save()
+
     return render(request, "post.html", {"post": post})
 
 
 def post_edit(request, post_id):
     if not request.user.is_authenticated:
-        return redirect("index")
+        return redirect("login")
 
     try:
         post = Article.objects.get(id=post_id)
@@ -130,7 +133,7 @@ def post_edit(request, post_id):
 
 def post_delete(request, post_id):
     if not request.user.is_authenticated:
-        return redirect("index")
+        return redirect("login")
 
     try:
         post = Article.objects.get(id=post_id)
@@ -146,7 +149,7 @@ def post_delete(request, post_id):
 
 def post_create(request):
     if not request.user.is_authenticated:
-        return redirect("index")
+        return redirect("login")
 
     if request.method == "POST":
         title = request.POST.get("title")
