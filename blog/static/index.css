@@ -91,6 +91,30 @@ main {
 	margin: 1rem 0;
 }
 
+.comments {
+	margin-top: 2rem;
+	float: right;
+	max-width: 40%;
+}
+
+.comment-item {
+	background-color: var(--primary);
+	display: inline-block;
+	border-radius: 0.5rem;
+	padding: 1rem;
+	margin-bottom: 1rem;
+}
+
+.comment-header {
+	color: var(--text);
+	border-bottom: 2px solid var(--background);
+	margin-bottom: 1.5rem;
+}
+
+.comment-header > h3 {
+	margin: 0;
+}
+
 .link-button {
 	text-decoration: none;
 	background-color: var(--accent);
