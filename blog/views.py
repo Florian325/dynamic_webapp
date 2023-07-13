@@ -154,7 +154,6 @@ def post_create(request):
     if request.method == "POST":
         title = request.POST.get("title")
         content = request.POST.get("content")
-
         if title == "" or content == "":
             return render(
                 request, "post_edit.html", {"error": "Title or content missing"}
