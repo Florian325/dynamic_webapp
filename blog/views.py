@@ -38,7 +38,7 @@ def register_user(request):
             return render(
                 request, "user/register.html", {"error": "Passwords do not match"}
             )
-        if username is None or password is None:
+        if username == "" or password == "":
             return render(
                 request, "user/register.html", {"error": "Username or password missing"}
             )
@@ -117,7 +117,7 @@ def post_edit(request, post_id):
     if request.method == "POST":
         title = request.POST.get("title")
         content = request.POST.get("content")
-        if title is None or content is None:
+        if title == "" or content == "":
             return render(
                 request, "post_edit.html", {"error": "Title or content missing"}
             )
@@ -154,7 +154,8 @@ def post_create(request):
     if request.method == "POST":
         title = request.POST.get("title")
         content = request.POST.get("content")
-        if title is None or content is None:
+
+        if title == "" or content == "":
             return render(
                 request, "post_edit.html", {"error": "Title or content missing"}
             )
